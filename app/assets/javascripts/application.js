@@ -14,6 +14,7 @@
 //= require bootstrap
 //= require rails-ujs
 //= require activestorage
+//= require turbolinks
 //= require custom
 //= require channels/chatrooms
 //= require channels/message

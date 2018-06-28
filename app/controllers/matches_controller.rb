@@ -1,7 +1,13 @@
 class MatchesController < ApplicationController
+  before_action :load_league, only: :index
+
   def index
-    @q = Match.start_match.page(params[:page]).per(Settings.per.limit_match).ransack params[:q]
-    @matches = @q.result
+    # @matches = Match.start_match.page(params[:page]).per(Settings.per.limit_match)
+    @matches = Match.start_match.leaguage_find(params[:leg]).page(params[:page]).
+               per(Settings.per.limit_match)
+    # if params[:leg]
+    #   @matches = Match.where(league_id: params[:leg]).page(params[:page]).per(Settings.per.limit_match)
+    # end
   end
 
   def show
@@ -15,5 +21,11 @@ class MatchesController < ApplicationController
       @message = Message.new
       @informations = @match.informations
     end
+  end
+
+  private
+
+  def load_league
+    @leagues = League.select :id, :name
   end
 end

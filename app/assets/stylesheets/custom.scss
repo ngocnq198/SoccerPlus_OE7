@@ -65,7 +65,6 @@ ul {
 .bg-content {
   background-color: $white;
   min-height: 375px;
-  padding-bottom: 15px;
   &.form_login {
     h2 {
       font-size: 25px;
@@ -126,9 +125,7 @@ ul {
 
 .point_match {
   font-size: 25px;
-  b {
-    color: $yellow;
-  }
+  color: $yellow;
 }
 
 .modal {
@@ -324,5 +321,40 @@ p.detail-match {
   color: $white;
   a {
     color: $white;
+  }
+}
+
+.match_page {
+  &>div:first-child {
+    padding-right: 0;
+  }
+  &>div:last-child {
+    padding-left: 0;
+  }
+  .bg-content {
+    h4 {
+      &.text-center {
+        margin: 0;
+        padding-top: 20px;
+        color: $red;
+      }
+    }
+  }
+}
+
+.league_menu {
+  list-style-type: none;
+  padding: 10px;
+  background-color: $grey;
+  li {
+    a {
+      color: $white;
+    }
+  }
+}
+
+span {
+  &.p-10 {
+    padding-left: 15px;
   }
 }

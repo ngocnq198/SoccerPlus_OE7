@@ -15,9 +15,15 @@ class Match < ApplicationRecord
   validates :team_id_1, presence: true
   validates :team_id_2, presence: true
 
-  scope :start_match, ->{where("start_time > ?", Time.now)}
+  scope :start_match, ->{where("start_time < ?", Time.now)}
 
   scope :end_match, ->{where("end_time < ?", Time.now)}
 
   scope :live, ->(num){where("live = ?", num)}
+
+  scope :leaguage_find, ->(league_id){
+    if league_id.present?
+      where league_id: league_id
+    end
+  }
 end

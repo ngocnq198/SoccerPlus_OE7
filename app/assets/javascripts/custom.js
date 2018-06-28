@@ -1,4 +1,4 @@
-$(document).ready(function(){
+$(document).on('turbolinks:load', function(){
   $('.new_content a').on('click',function(e){
     if(!$(this).attr('href').includes('.com') || !$(this).attr('href').includes('www')) {
       e.preventDefault();
@@ -12,6 +12,9 @@ $(document).ready(function(){
   setTimeout(function(){
     $('body').find('.alert').remove();
   },3000);
+
+  var height_content = $('.match_page .bg-content').height();
+  $('.league_menu').css('min-height', height_content);
 
 });
 
@@ -28,3 +31,30 @@ $(document).keypress(function(key){
   js.src = 'https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v3.0&appId=2156255167965970&autoLogAppEvents=1';
   fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));
+
+(function($) {
+  var fbRoot;
+
+  function saveFacebookRoot() {
+    if ($('#fb-root').length) {
+      fbRoot = $('#fb-root').detach();
+    }
+  };
+
+  function restoreFacebookRoot() {
+    if (fbRoot != null) {
+      if ($('#fb-root').length) {
+        $('#fb-root').replaceWith(fbRoot);
+      } else {
+        $('body').append(fbRoot);
+      }
+    }
+
+    if (typeof FB !== "undefined" && FB !== null) { // Instance of FacebookSDK
+      FB.XFBML.parse();
+    }
+  };
+
+  document.addEventListener('turbolinks:request-start', saveFacebookRoot)
+  document.addEventListener('turbolinks:load', restoreFacebookRoot)
+}(jQuery));
